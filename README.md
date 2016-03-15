@@ -23,13 +23,21 @@ Lastly, the client can request data from the server by repeatedly send a request
 # The Design Graph 
 The Design of the Client side I – Forwarding Data
 
+![The Design of the Client side I – Forwarding Data](https://raw.githubusercontent.com/Han-Jiang/distributed-system/master/images/NDS Client I.jpg)   
 
 The forward mechanism
 
+![The forward mechanism](https://raw.githubusercontent.com/Han-Jiang/distributed-system/master/images/NDS forward.jpg)   
+
 The Design of the Client side II – Receive Results and Get Output
+
+![Receive Results and Get Output](https://raw.githubusercontent.com/Han-Jiang/distributed-system/master/images/Client II New.jpg)   
 
 
 The Design of the Server Side
+
+![The Design of the Server Side](https://raw.githubusercontent.com/Han-Jiang/distributed-system/master/images/NDS Server.jpg)   
+
 
 # The Performance
 
@@ -57,10 +65,10 @@ When a connection is establish, just like the client, the server will create a p
 The producer thread of the server will put all the data into different buffer by the ASCII code of the second character of the string modulo the number of file it split. A number of file saver thread is also created, these thread will keep taking data from the buffer and save it into file. When the client send a "#ODF" command (Original Data Finished), the serve will call a number of reducer thread, each of the thread will read all the data from a file and put it into a hash set, and then save all the element back into a new file and delete the old file. 
 
 ## How the client request data
-The client will send a command like "#RequestData*number*number" where the number is a start number and an end number, for example "#RequestData*0*100". 
+The client will send a command like "#RequestData*number*number" where the number is a start number and an end number, for example "#RequestData\*0\*100". 
 
 ## How the server send back to the request data
-When the server receive data like "#RequestData*1500000*3000000" the server will create an executor service and a number of thread to read the file in the file system, for each file reader thread, they will read out the data with the counter in the range of 1500000 and 3000000, all these data is put into a concurrent skip list, when all this reader thread finish, the sender thread will send all the data in the concurrent skip list to the Client.
+When the server receive data like "#RequestData\*1500000\*3000000" the server will create an executor service and a number of thread to read the file in the file system, for each file reader thread, they will read out the data with the counter in the range of 1500000 and 3000000, all these data is put into a concurrent skip list, when all this reader thread finish, the sender thread will send all the data in the concurrent skip list to the Client.
 
 ## How the client receive request data
 After the client have receive the data form the serve, all the data is put into a single concurrent skip list (This ensure the data is in order), when all the servers has send back a command "#SRDF"(Send Request Data Finished) the client will call a file saver thread and save the file into the disk.
