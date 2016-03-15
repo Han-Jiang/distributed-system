@@ -41,6 +41,11 @@ The Design of the Server Side
 
 # The Performance
 
+![performance1](https://raw.githubusercontent.com/Han-Jiang/distributed-system/master/images/performance1.png)  
+
+![performance2](https://raw.githubusercontent.com/Han-Jiang/distributed-system/master/images/performance2.png)  
+
+![performance3](https://raw.githubusercontent.com/Han-Jiang/distributed-system/master/images/performance3.png)  
 
 
 We can see form the chart that when using more machines, less time is needed to handle the data, however, when using more than a certain number of machines, here is about 8 or 9, the more machines are used, the more time is needed. This may because the IO cost will be too high when using too much machines while the speed of handling the data is already quick enough.
